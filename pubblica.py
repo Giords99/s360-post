@@ -20,6 +20,7 @@ import urllib.request
 from zoneinfo import ZoneInfo
 
 API = "https://graph.instagram.com/v23.0"
+API_FB = "https://graph.facebook.com/v23.0"
 ROMA = ZoneInfo("Europe/Rome")
 RADICE = pathlib.Path(__file__).resolve().parent
 CALENDARIO = RADICE / "calendario.json"
@@ -35,7 +36,10 @@ class ErroreS360(Exception):
 def api(metodo, percorso, **parametri):
     parametri["access_token"] = os.environ["IG_TOKEN"]
     dati = urllib.parse.urlencode(parametri)
-    url = f"{API}/{percorso}"
+    # Token di Instagram Login (IG...) -> graph.instagram.com
+    # Token Meta/Facebook, es. utente di sistema del portfolio (EAA...) -> graph.facebook.com
+    base = API_FB if parametri["access_token"].startswith("EAA") else API
+    url = f"{base}/{percorso}"
     if metodo == "GET":
         richiesta = urllib.request.Request(f"{url}?{dati}")
     else:
@@ -62,11 +66,13 @@ def verifica_token():
           f"spazi/a capo tolti: {len(grezzo) - len(tok)}, caratteri insoliti: {strani or 'nessuno'}")
     if not tok:
         raise ErroreS360("Il segreto IG_TOKEN è vuoto o non esiste")
-    io = api("GET", "me", fields="user_id,username")
-    atteso = os.environ.get("IG_USER_ID")
-    if atteso and str(io.get("user_id")) != str(atteso):
-        raise ErroreS360(f"Il token appartiene a @{io.get('username')} ({io.get('user_id')}), non all'account atteso {atteso}")
-    print(f"Token valido per @{io.get('username')} (ID {io.get('user_id')})")
+    # lettura dell'account Instagram: funziona con entrambi i tipi di token
+    atteso = os.environ["IG_USER_ID"]
+    io = api("GET", atteso, fields="username")
+    if io.get("username") != "s360.data":
+        raise ErroreS360(f"Il token legge l'account @{io.get('username')}, non @s360.data")
+    print(f"Token valido: può leggere @{io.get('username')} (ID {atteso}), "
+          f"via {'graph.facebook.com' if tok.startswith('EAA') else 'graph.instagram.com'}")
     return io
 
 
