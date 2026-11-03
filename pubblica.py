@@ -53,6 +53,15 @@ def api(metodo, percorso, **parametri):
 
 
 def verifica_token():
+    grezzo = os.environ.get("IG_TOKEN", "")
+    tok = grezzo.strip().strip('"').strip("'").strip()
+    os.environ["IG_TOKEN"] = tok
+    # controllo senza rivelare il token: lunghezza, inizio e caratteri strani
+    strani = sorted({c for c in tok if not (c.isalnum() or c in "-_.")})
+    print(f"Controllo token: {len(tok)} caratteri, inizia con '{tok[:4]}', "
+          f"spazi/a capo tolti: {len(grezzo) - len(tok)}, caratteri insoliti: {strani or 'nessuno'}")
+    if not tok:
+        raise ErroreS360("Il segreto IG_TOKEN è vuoto o non esiste")
     io = api("GET", "me", fields="user_id,username")
     atteso = os.environ.get("IG_USER_ID")
     if atteso and str(io.get("user_id")) != str(atteso):
