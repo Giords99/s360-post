@@ -5,6 +5,10 @@ on:
   # Lo script pubblica solo i post del calendario arrivati all'ora prevista.
   schedule:
     - cron: '7,37 10-13 * * 1-5'
+  # Appena cambia il calendario (es. una Notizia approvata da pubblicare subito)
+  push:
+    branches: [main]
+    paths: ['calendario.json']
   # Avvio a mano dalla scheda Actions (per la prova a secco)
   workflow_dispatch:
     inputs:
@@ -37,6 +41,8 @@ jobs:
       CARTELLA_PROVA: ${{ inputs.cartella }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -47,11 +53,11 @@ jobs:
         run: python pubblica.py --prova "$CARTELLA_PROVA"
 
       - name: Pubblica i post del calendario
-        if: github.event_name == 'schedule' || inputs.azione == 'Pubblica i post del calendario'
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.azione == 'Pubblica i post del calendario'
         run: python pubblica.py
 
       - name: Salva il calendario aggiornato
-        if: always() && (github.event_name == 'schedule' || inputs.azione == 'Pubblica i post del calendario')
+        if: always() && (github.event_name == 'schedule' || github.event_name == 'push' || inputs.azione == 'Pubblica i post del calendario')
         run: |
           git config user.name "s360-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
