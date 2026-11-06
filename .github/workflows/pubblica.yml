@@ -8,8 +8,16 @@ on:
   # Avvio a mano dalla scheda Actions (per la prova a secco)
   workflow_dispatch:
     inputs:
-      prova:
-        description: 'Cartella da provare SENZA pubblicare. Svuota il campo per eseguire il calendario vero.'
+      azione:
+        description: 'Cosa fare'
+        type: choice
+        required: true
+        default: 'Prova a secco (non pubblica)'
+        options:
+          - 'Prova a secco (non pubblica)'
+          - 'Pubblica i post del calendario'
+      cartella:
+        description: 'Solo per la prova a secco: cartella da controllare'
         required: false
         default: 'post/_prova'
 
@@ -26,7 +34,7 @@ jobs:
     env:
       IG_TOKEN: ${{ secrets.IG_TOKEN }}
       IG_USER_ID: '17841422521205896'
-      CARTELLA_PROVA: ${{ inputs.prova }}
+      CARTELLA_PROVA: ${{ inputs.cartella }}
     steps:
       - uses: actions/checkout@v4
 
@@ -35,15 +43,15 @@ jobs:
           python-version: '3.12'
 
       - name: Prova a secco (non pubblica)
-        if: github.event_name == 'workflow_dispatch' && inputs.prova != ''
+        if: github.event_name == 'workflow_dispatch' && inputs.azione == 'Prova a secco (non pubblica)'
         run: python pubblica.py --prova "$CARTELLA_PROVA"
 
       - name: Pubblica i post del calendario
-        if: github.event_name == 'schedule' || inputs.prova == ''
+        if: github.event_name == 'schedule' || inputs.azione == 'Pubblica i post del calendario'
         run: python pubblica.py
 
       - name: Salva il calendario aggiornato
-        if: always() && (github.event_name == 'schedule' || inputs.prova == '')
+        if: always() && (github.event_name == 'schedule' || inputs.azione == 'Pubblica i post del calendario')
         run: |
           git config user.name "s360-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
