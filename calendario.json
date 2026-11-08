@@ -50,5 +50,12 @@
     "cartella": "post/2026-11-20_lente_lec",
     "stato": "programmato",
     "nota": "spostato da Buffer il 6/11"
+  },
+  {
+    "data": "2026-11-24",
+    "ora": "13:00",
+    "cartella": "post/2026-11-24_reel_numero_ricavi_inter",
+    "stato": "programmato",
+    "nota": "Primo reel ('Un numero'), approvato l'8/11"
   }
 ]
