@@ -28,6 +28,7 @@ ROMA = ZoneInfo("Europe/Rome")
 RADICE = pathlib.Path(__file__).resolve().parent
 CALENDARIO = RADICE / "calendario.json"
 MAX_RITARDO = dt.timedelta(hours=6)  # oltre questo ritardo il post NON esce da solo
+ATTESA_STORIA = dt.timedelta(minutes=75)  # tempo lasciato per la storia fatta a mano
 
 
 class ErroreS360(Exception):
@@ -245,6 +246,38 @@ def prova(cartella):
     print("Prova riuscita: token, file e caption vanno bene. Nulla è stato pubblicato.")
 
 
+def storie_dopo(quando):
+    """Storie pubblicate sul profilo dopo 'quando' (le storie restano visibili 24 ore)."""
+    r = api("GET", f"{os.environ['IG_USER_ID']}/stories", fields="id,timestamp")
+    return [x for x in r.get("data", [])
+            if dt.datetime.fromisoformat(x["timestamp"].replace("+0000", "+00:00")) > quando]
+
+
+def gestisci_storie(voci, adesso):
+    """Storie di riserva: per i post pubblicati da almeno ATTESA_STORIA senza una storia fatta a mano."""
+    for v in voci:
+        if v.get("stato") != "pubblicato" or v.get("storia") != "in attesa":
+            continue
+        uscito = dt.datetime.fromisoformat(v["pubblicato_il"])
+        if adesso - uscito < ATTESA_STORIA:
+            continue
+        if adesso - uscito > dt.timedelta(hours=20):
+            v["storia"] = "non pubblicata: troppo tardi"
+            continue
+        try:
+            if storie_dopo(uscito):
+                v["storia"] = "fatta a mano"
+                print(f"{v['cartella']}: c'è già una storia dopo il post, non ne pubblico un'altra")
+                continue
+            id_s = prepara_storia(v["cartella"])
+            pubblica_container(id_s)
+            v["storia"] = "pubblicata in automatico"
+            print(f"{v['cartella']}: storia di riserva pubblicata")
+        except ErroreS360 as e:
+            v["storia"] = f"non pubblicata: {e}"
+            print(f"{v['cartella']}: storia non pubblicata ({e})")
+
+
 def esegui_calendario():
     voci = json.loads(CALENDARIO.read_text(encoding="utf-8"))
     adesso = dt.datetime.now(ROMA)
@@ -275,22 +308,19 @@ def esegui_calendario():
             v.update(stato="pubblicato", pubblicato_il=dt.datetime.now(ROMA).isoformat(timespec="minutes"),
                      id_media=id_media, link=link)
             print(f"  PUBBLICATO: {link}")
-            # storia "Nuovo post": se non riesce, il post resta pubblicato e lo si annota soltanto
-            try:
-                id_s = prepara_storia(v["cartella"])
-                if id_s:
-                    pubblica_container(id_s)
-                    v["storia"] = "pubblicata"
-                    print("  storia pubblicata")
-            except ErroreS360 as e:
-                v["storia"] = f"non pubblicata: {e}"
-                print(f"  storia non pubblicata: {e}")
+            # storia "Nuovo post": non subito. Si lascia il tempo all'utente di condividere il post a mano
+            # (storia toccabile); se dopo ATTESA_STORIA non c'è nessuna storia, la pubblica lo script.
+            if (cartella_di(v["cartella"]) / "storia.jpg").exists():
+                v["storia"] = "in attesa"
         except ErroreS360 as e:
             v.update(stato="errore", nota=str(e))
             errori.append(f"{v['cartella']}: {e}")
         # salva subito, così un post non può uscire due volte
         CALENDARIO.write_text(json.dumps(voci, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    if any(v.get("storia") == "in attesa" for v in voci):
+        verifica_token()
+        gestisci_storie(voci, dt.datetime.now(ROMA))
     CALENDARIO.write_text(json.dumps(voci, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if errori:
         raise ErroreS360("\n".join(errori))
