@@ -110,7 +110,7 @@ def cartella_di(cartella):
 
 def leggi_post(cartella):
     cartella = cartella_di(cartella)
-    slide = sorted(p for p in cartella.iterdir() if p.suffix.lower() in (".jpg", ".jpeg") and p.name != "copertina.jpg")
+    slide = sorted(p for p in cartella.iterdir() if p.suffix.lower() in (".jpg", ".jpeg") and p.name not in ("copertina.jpg", "storia.jpg"))
     png = [p.name for p in cartella.iterdir() if p.suffix.lower() == ".png"]
     if png:
         raise ErroreS360(f"Instagram accetta solo JPEG: convertire {png}")
@@ -217,6 +217,17 @@ def prepara(cartella):
     return prepara_reel(cartella) if (cartella_di(cartella) / "reel.mp4").exists() else prepara_carousel(cartella)
 
 
+def prepara_storia(cartella):
+    """Storia "Nuovo post" (storia.jpg, 1080x1920), se c'è nella cartella. Restituisce l'ID del container o None."""
+    f = cartella_di(cartella) / "storia.jpg"
+    if not f.exists():
+        return None
+    r = api("POST", f"{os.environ['IG_USER_ID']}/media", media_type="STORIES", image_url=url_pubblico(f))
+    attendi_pronto(r["id"], "storia")
+    print("  storia pronta")
+    return r["id"]
+
+
 def pubblica_container(id_container):
     utente = os.environ["IG_USER_ID"]
     r = api("POST", f"{utente}/media_publish", creation_id=id_container)
@@ -230,6 +241,7 @@ def prova(cartella):
     print("PROVA A SECCO: nessun post verrà pubblicato.")
     verifica_token()
     prepara(cartella)
+    prepara_storia(cartella)
     print("Prova riuscita: token, file e caption vanno bene. Nulla è stato pubblicato.")
 
 
@@ -263,6 +275,16 @@ def esegui_calendario():
             v.update(stato="pubblicato", pubblicato_il=dt.datetime.now(ROMA).isoformat(timespec="minutes"),
                      id_media=id_media, link=link)
             print(f"  PUBBLICATO: {link}")
+            # storia "Nuovo post": se non riesce, il post resta pubblicato e lo si annota soltanto
+            try:
+                id_s = prepara_storia(v["cartella"])
+                if id_s:
+                    pubblica_container(id_s)
+                    v["storia"] = "pubblicata"
+                    print("  storia pubblicata")
+            except ErroreS360 as e:
+                v["storia"] = f"non pubblicata: {e}"
+                print(f"  storia non pubblicata: {e}")
         except ErroreS360 as e:
             v.update(stato="errore", nota=str(e))
             errori.append(f"{v['cartella']}: {e}")
