@@ -61,5 +61,12 @@
     "cartella": "post/2026-11-24_reel_numero_ricavi_inter",
     "stato": "programmato",
     "nota": "Primo reel ('Un numero'), approvato l'8/11"
+  },
+  {
+    "data": "2026-11-09",
+    "ora": "17:53",
+    "cartella": "post/2026-11-09_notizia_generali_stadium",
+    "stato": "programmato",
+    "nota": "Notizia"
   }
 ]
