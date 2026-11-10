@@ -78,5 +78,12 @@
     "cartella": "post/2026-11-10_reel_wage",
     "stato": "programmato",
     "nota": "Reel classifica costo del personale (dal post del 9/11), approvato il 10/11"
+  },
+  {
+    "data": "2026-11-17",
+    "ora": "13:00",
+    "cartella": "post/2026-11-17_reel_dip_plus",
+    "stato": "programmato",
+    "nota": "Reel classifica plusvalenze (dal post del 16/11), approvato il 10/11"
   }
 ]
