@@ -189,7 +189,12 @@ def carica_video(id_container, uri, video):
         raise ErroreS360(f"Caricamento del video non riuscito: {esito}")
 
 
-def prepara_reel(cartella):
+# Varianti di caricamento del reel, provate in ordine se media_publish risponde con un errore
+# (10/11: "400 Fatal" ripetuto con il caricamento diretto + copertina).
+VARIANTI_REEL = [("diretto", True), ("link", True), ("link", False)]
+
+
+def prepara_reel(cartella, modo="diretto", con_copertina=True):
     """Crea su Instagram il reel (non ancora pubblicato) e restituisce l'ID del container."""
     c = cartella_di(cartella)
     video = c / "reel.mp4"
@@ -199,14 +204,19 @@ def prepara_reel(cartella):
     utente = os.environ["IG_USER_ID"]
     extra = {"share_to_feed": "true"}
     copertina = c / "copertina.jpg"
-    if copertina.exists():
+    if copertina.exists() and con_copertina:
         extra["cover_url"] = url_pubblico(copertina)
-    try:
-        r = api("POST", f"{utente}/media", media_type="REELS", upload_type="resumable", caption=caption, **extra)
-        carica_video(r["id"], r["uri"], video)
-        print("  video caricato")
-    except (ErroreS360, KeyError) as e:
-        print(f"  caricamento diretto non riuscito ({e}); provo con il link al file su GitHub")
+    print(f"  variante: caricamento {modo}, {'con' if 'cover_url' in extra else 'senza'} copertina")
+    r = None
+    if modo == "diretto":
+        try:
+            r = api("POST", f"{utente}/media", media_type="REELS", upload_type="resumable", caption=caption, **extra)
+            carica_video(r["id"], r["uri"], video)
+            print("  video caricato")
+        except (ErroreS360, KeyError) as e:
+            print(f"  caricamento diretto non riuscito ({e}); provo con il link al file su GitHub")
+            r = None
+    if r is None:
         r = api("POST", f"{utente}/media", media_type="REELS", video_url=url_pubblico(video), caption=caption, **extra)
     attendi_pronto(r["id"], "reel", tentativi=60)  # i video richiedono più tempo: fino a ~10 minuti
     print("  reel pronto")
@@ -304,6 +314,29 @@ def gestisci_storie(voci, adesso):
             print(f"{v['cartella']}: storia non pubblicata ({e})")
 
 
+def pubblica_reel(cartella):
+    """Prova le varianti di VARIANTI_REEL finché una va; prima di ogni nuova variante controlla che il reel non sia già uscito."""
+    try:
+        lim = api("GET", f"{os.environ['IG_USER_ID']}/content_publishing_limit", fields="config,quota_usage")
+        print(f"  limite di pubblicazione: {lim.get('data')}")
+    except ErroreS360 as e:
+        print(f"  (limite di pubblicazione non leggibile: {e})")
+    inizio = dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=1)
+    ultimo = None
+    for modo, cop in VARIANTI_REEL:
+        x = uscito_dopo(inizio)
+        if x:
+            print("  il reel risulta già pubblicato sul profilo")
+            return x["id"], x.get("permalink", "")
+        try:
+            id_c = prepara_reel(cartella, modo, cop)
+            return pubblica_container(id_c, tentativi=2)
+        except ErroreS360 as e:
+            print(f"  variante non riuscita: {e}")
+            ultimo = e
+    raise ultimo
+
+
 def esegui_calendario():
     voci = json.loads(CALENDARIO.read_text(encoding="utf-8"))
     adesso = dt.datetime.now(ROMA)
@@ -329,8 +362,11 @@ def esegui_calendario():
     for v in da_fare:
         print(f"Pubblico {v['cartella']} (previsto {v['data']} {v['ora']})")
         try:
-            id_c = prepara(v["cartella"])
-            id_media, link = pubblica_container(id_c)
+            if (cartella_di(v["cartella"]) / "reel.mp4").exists():
+                id_media, link = pubblica_reel(v["cartella"])
+            else:
+                id_c = prepara(v["cartella"])
+                id_media, link = pubblica_container(id_c)
             v.update(stato="pubblicato", pubblicato_il=dt.datetime.now(ROMA).isoformat(timespec="minutes"),
                      id_media=id_media, link=link)
             print(f"  PUBBLICATO: {link}")
