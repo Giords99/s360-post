@@ -229,11 +229,37 @@ def prepara_storia(cartella):
     return r["id"]
 
 
-def pubblica_container(id_container):
+def uscito_dopo(quando):
+    """Ultimo contenuto del feed pubblicato dopo 'quando' (serve se media_publish dà errore ma pubblica lo stesso)."""
+    r = api("GET", f"{os.environ['IG_USER_ID']}/media", fields="id,timestamp,permalink", limit="3")
+    for x in r.get("data", []):
+        if dt.datetime.fromisoformat(x["timestamp"].replace("+0000", "+00:00")) > quando:
+            return x
+    return None
+
+
+def pubblica_container(id_container, tentativi=3):
+    """media_publish con controllo: a volte Instagram risponde con un errore (es. '400 Fatal', 10/11)
+    anche se il contenuto è uscito. Prima di riprovare si guarda se è già sul profilo, così non esce due volte."""
     utente = os.environ["IG_USER_ID"]
-    r = api("POST", f"{utente}/media_publish", creation_id=id_container)
-    info = api("GET", r["id"], fields="permalink")
-    return r["id"], info.get("permalink", "")
+    inizio = dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=1)
+    for n in range(1, tentativi + 1):
+        try:
+            r = api("POST", f"{utente}/media_publish", creation_id=id_container)
+            info = api("GET", r["id"], fields="permalink")
+            return r["id"], info.get("permalink", "")
+        except ErroreS360 as e:
+            print(f"  tentativo {n}: {e}")
+            time.sleep(30)
+            try:
+                x = uscito_dopo(inizio)
+            except ErroreS360:
+                x = None
+            if x:
+                print("  ...ma il contenuto risulta pubblicato sul profilo")
+                return x["id"], x.get("permalink", "")
+            if n == tentativi:
+                raise
 
 
 # ---------- modalità ----------
@@ -270,7 +296,7 @@ def gestisci_storie(voci, adesso):
                 print(f"{v['cartella']}: c'è già una storia dopo il post, non ne pubblico un'altra")
                 continue
             id_s = prepara_storia(v["cartella"])
-            pubblica_container(id_s)
+            pubblica_container(id_s, tentativi=1)  # le storie non sono nel feed: niente controllo, niente nuovo tentativo
             v["storia"] = "pubblicata in automatico"
             print(f"{v['cartella']}: storia di riserva pubblicata")
         except ErroreS360 as e:
