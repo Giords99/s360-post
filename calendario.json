@@ -76,8 +76,8 @@
     "data": "2026-11-10",
     "ora": "13:00",
     "cartella": "post/2026-11-10_reel_wage",
-    "stato": "programmato",
-    "nota": "Reel classifica costo del personale, approvato il 10/11. Primo tentativo 13:46: errore 400 Fatal su media_publish, non uscito; riprogrammato alle 14:16"
+    "stato": "errore",
+    "nota": "Instagram ha risposto 400 su 17841422521205896/media_publish: Fatal"
   },
   {
     "data": "2026-11-17",
