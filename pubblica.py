@@ -54,7 +54,12 @@ def api(metodo, percorso, **parametri):
     except urllib.error.HTTPError as e:
         corpo = e.read().decode(errors="replace")
         try:
-            msg = json.loads(corpo)["error"].get("message", corpo)
+            err = json.loads(corpo)["error"]
+            msg = err.get("message", corpo)
+            # dettagli che servono a capire errori generici come "Fatal" (es. subcode 2207082 = video non ancora pronto)
+            det = [f"{k}={err[k]}" for k in ("code", "error_subcode", "error_user_title", "error_user_msg", "fbtrace_id") if err.get(k)]
+            if det:
+                msg += " [" + "; ".join(str(d) for d in det) + "]"
         except Exception:
             msg = corpo
         raise ErroreS360(f"Instagram ha risposto {e.code} su {percorso}: {msg}") from None
@@ -248,7 +253,7 @@ def uscito_dopo(quando):
     return None
 
 
-def pubblica_container(id_container, tentativi=3):
+def pubblica_container(id_container, tentativi=3, attese=(30, 30, 30)):
     """media_publish con controllo: a volte Instagram risponde con un errore (es. '400 Fatal', 10/11)
     anche se il contenuto è uscito. Prima di riprovare si guarda se è già sul profilo, così non esce due volte."""
     utente = os.environ["IG_USER_ID"]
@@ -260,7 +265,11 @@ def pubblica_container(id_container, tentativi=3):
             return r["id"], info.get("permalink", "")
         except ErroreS360 as e:
             print(f"  tentativo {n}: {e}")
-            time.sleep(30)
+            try:
+                print(f"  stato del contenuto: {api('GET', id_container, fields='status_code,status')}")
+            except ErroreS360:
+                pass
+            time.sleep(attese[min(n - 1, len(attese) - 1)])
             try:
                 x = uscito_dopo(inizio)
             except ErroreS360:
@@ -330,7 +339,10 @@ def pubblica_reel(cartella):
             return x["id"], x.get("permalink", "")
         try:
             id_c = prepara_reel(cartella, modo, cop)
-            return pubblica_container(id_c, tentativi=2)
+            # anche con status FINISHED la versione del video per la riproduzione può non essere pronta
+            # (errore 2207082 "progressive_video_not_ready"): si aspetta e si riprova con attese crescenti
+            time.sleep(60)
+            return pubblica_container(id_c, tentativi=4, attese=(60, 120, 180, 180))
         except ErroreS360 as e:
             print(f"  variante non riuscita: {e}")
             ultimo = e
