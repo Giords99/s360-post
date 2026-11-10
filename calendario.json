@@ -77,7 +77,7 @@
     "ora": "13:00",
     "cartella": "post/2026-11-10_reel_wage",
     "stato": "errore",
-    "nota": "Instagram ha risposto 400 su 17841422521205896/media_publish: Fatal"
+    "nota": "10/11: 9 tentativi via API (con e senza musica, caricamento diretto o link, con e senza copertina) tutti con 400 Fatal su media_publish. Da pubblicare a mano dal telefono; causa da trovare prima del 17/11"
   },
   {
     "data": "2026-11-17",
