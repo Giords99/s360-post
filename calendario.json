@@ -24,8 +24,12 @@
     "data": "2026-11-11",
     "ora": "13:00",
     "cartella": "post/2026-11-11_flash_bilanci_2026",
-    "stato": "programmato",
-    "nota": "Flash bilanci 2025/26, approvato l'8/11"
+    "stato": "pubblicato",
+    "nota": "Flash bilanci 2025/26, approvato l'8/11",
+    "pubblicato_il": "2026-11-11T14:06+01:00",
+    "id_media": "18643813195054318",
+    "link": "https://www.instagram.com/p/DfmjLo7mF81/",
+    "storia": "in attesa"
   },
   {
     "data": "2026-11-13",
