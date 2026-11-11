@@ -94,7 +94,10 @@
     "data": "2026-11-11",
     "ora": "17:55",
     "cartella": "post/2026-11-11_notizia_cagliari_stadio",
-    "stato": "programmato",
-    "nota": "Notizia"
+    "stato": "pubblicato",
+    "nota": "Notizia",
+    "pubblicato_il": "2026-11-11T17:56+01:00",
+    "id_media": "18286039231294870",
+    "link": "https://www.instagram.com/p/Dfm9g6HF8t1/"
   }
 ]
