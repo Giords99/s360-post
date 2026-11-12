@@ -43,6 +43,8 @@ def api(metodo, percorso, **parametri):
     # Token di Instagram Login (IG...) -> graph.instagram.com
     # Token Meta/Facebook, es. utente di sistema del portfolio (EAA...) -> graph.facebook.com
     base = API_FB if parametri["access_token"].startswith("EAA") else API
+    if os.environ.get("IG_API_BASE"):  # forzato per il token dei reel (vedi pubblica_reel)
+        base = os.environ["IG_API_BASE"]
     url = f"{base}/{percorso}"
     if metodo == "GET":
         richiesta = urllib.request.Request(f"{url}?{dati}")
@@ -334,7 +336,21 @@ def pubblica_reel(cartella):
     salvati = os.environ["IG_TOKEN"], os.environ["IG_USER_ID"]
     os.environ["IG_TOKEN"] = tok_reel
     try:
-        io = api("GET", "me", fields="user_id,username")
+        # il token generato con l'accesso Instagram (app con login unificato) inizia con EAA:
+        # si prova prima graph.instagram.com, poi graph.facebook.com
+        io = None
+        for base in (API, API_FB):
+            os.environ["IG_API_BASE"] = base
+            try:
+                io = api("GET", "me", fields="user_id,username")
+                print(f"  token dei reel accettato da {base}")
+                break
+            except ErroreS360 as e:
+                print(f"  token dei reel rifiutato da {base}: {e}")
+        if io is None:
+            raise ErroreS360("IG_TOKEN_REEL non è accettato né da graph.instagram.com né da graph.facebook.com")
+        if "user_id" not in io:
+            io.update(api("GET", "me", fields="id,username"))
         if io.get("username") != "s360.data":
             raise ErroreS360(f"IG_TOKEN_REEL legge l'account @{io.get('username')}, non @s360.data")
         os.environ["IG_USER_ID"] = str(io.get("user_id") or io.get("id"))
@@ -342,6 +358,7 @@ def pubblica_reel(cartella):
         return _pubblica_reel(cartella)
     finally:
         os.environ["IG_TOKEN"], os.environ["IG_USER_ID"] = salvati
+        os.environ.pop("IG_API_BASE", None)
 
 
 def _pubblica_reel(cartella):
