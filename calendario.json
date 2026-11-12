@@ -118,7 +118,10 @@
     "data": "2026-11-12",
     "ora": "15:00",
     "cartella": "post/_prova_reel",
-    "stato": "programmato",
-    "nota": "Terza prova dei reel, con IG_TOKEN_REEL (token dall'accesso Instagram): da cancellare dal profilo se esce"
+    "stato": "pubblicato",
+    "nota": "Terza prova dei reel, con IG_TOKEN_REEL (token dall'accesso Instagram): da cancellare dal profilo se esce",
+    "pubblicato_il": "2026-11-12T15:11+01:00",
+    "id_media": "18111024472903374",
+    "link": "https://www.instagram.com/reel/DfpPM3-j4S2/"
   }
 ]
