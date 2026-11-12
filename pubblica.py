@@ -358,6 +358,12 @@ def pubblica_reel(cartella):
         if io.get("username") != "s360.data":
             raise ErroreS360(f"IG_TOKEN_REEL legge l'account @{io.get('username')}, non @s360.data")
         os.environ["IG_USER_ID"] = str(io.get("user_id") or io.get("id"))
+        try:  # scadenza del token dei reel, per sapere quando rinnovarlo
+            d = api("GET", "debug_token", input_token=tok_reel).get("data", {})
+            exp = d.get("expires_at") or 0
+            print(f"  scadenza del token dei reel: {dt.datetime.fromtimestamp(exp, ROMA):%d/%m/%Y %H:%M}" if exp else "  token dei reel senza scadenza")
+        except ErroreS360 as e:
+            print(f"  (scadenza del token dei reel non leggibile: {e})")
         print(f"  reel con il token di Instagram Login (@{io['username']}, ID {os.environ['IG_USER_ID']}, inizia con '{tok_reel[:4]}')")
         return _pubblica_reel(cartella)
     finally:
