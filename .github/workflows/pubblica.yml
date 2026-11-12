@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IG_TOKEN: ${{ secrets.IG_TOKEN }}
+      IG_TOKEN_REEL: ${{ secrets.IG_TOKEN_REEL }}
       IG_USER_ID: '17841422521205896'
       CARTELLA_PROVA: ${{ inputs.cartella }}
     steps:

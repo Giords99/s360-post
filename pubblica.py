@@ -325,6 +325,26 @@ def gestisci_storie(voci, adesso):
 
 
 def pubblica_reel(cartella):
+    """Reel: se c'è il segreto IG_TOKEN_REEL (token di Instagram Login, graph.instagram.com) si usa quello,
+    perché con il token dell'utente di sistema (graph.facebook.com, account senza Pagina Facebook)
+    media_publish dei reel risponde sempre 2207085 (10-12/11). Poi si torna al token normale."""
+    tok_reel = os.environ.get("IG_TOKEN_REEL", "").strip().strip('"').strip("'").strip()
+    if not tok_reel:
+        return _pubblica_reel(cartella)
+    salvati = os.environ["IG_TOKEN"], os.environ["IG_USER_ID"]
+    os.environ["IG_TOKEN"] = tok_reel
+    try:
+        io = api("GET", "me", fields="user_id,username")
+        if io.get("username") != "s360.data":
+            raise ErroreS360(f"IG_TOKEN_REEL legge l'account @{io.get('username')}, non @s360.data")
+        os.environ["IG_USER_ID"] = str(io.get("user_id") or io.get("id"))
+        print(f"  reel con il token di Instagram Login (@{io['username']}, ID {os.environ['IG_USER_ID']}, inizia con '{tok_reel[:4]}')")
+        return _pubblica_reel(cartella)
+    finally:
+        os.environ["IG_TOKEN"], os.environ["IG_USER_ID"] = salvati
+
+
+def _pubblica_reel(cartella):
     """Prova le varianti di VARIANTI_REEL finché una va; prima di ogni nuova variante controlla che il reel non sia già uscito."""
     try:
         lim = api("GET", f"{os.environ['IG_USER_ID']}/content_publishing_limit", fields="config,quota_usage")
