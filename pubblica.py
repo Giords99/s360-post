@@ -342,7 +342,11 @@ def pubblica_reel(cartella):
         for base in (API, API_FB):
             os.environ["IG_API_BASE"] = base
             try:
-                io = api("GET", "me", fields="user_id,username")
+                if base == API:
+                    io = api("GET", "me", fields="user_id,username")
+                else:  # su graph.facebook.com /me è il profilo Facebook: si legge direttamente l'account Instagram
+                    io = api("GET", salvati[1], fields="username")
+                    io["user_id"] = salvati[1]
                 print(f"  token dei reel accettato da {base}")
                 break
             except ErroreS360 as e:
