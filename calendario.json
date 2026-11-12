@@ -113,5 +113,12 @@
     "cartella": "post/_prova_reel",
     "stato": "prova fallita",
     "nota": "12/11: stesso errore 2207085 anche senza copertina e senza share_to_feed. Nulla pubblicato"
+  },
+  {
+    "data": "2026-11-12",
+    "ora": "15:00",
+    "cartella": "post/_prova_reel",
+    "stato": "programmato",
+    "nota": "Terza prova dei reel, con IG_TOKEN_REEL (token dall'accesso Instagram): da cancellare dal profilo se esce"
   }
 ]
