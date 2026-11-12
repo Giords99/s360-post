@@ -111,7 +111,7 @@
     "data": "2026-11-12",
     "ora": "14:00",
     "cartella": "post/_prova_reel",
-    "stato": "errore",
-    "nota": "Instagram ha risposto 400 su 17841422521205896/media_publish: Fatal [code=-1; error_subcode=2207085; error_user_title=Errore interno generico; error_user_msg=Si è verificato un errore interno del server. Riprova più tardi.; fbtrace_id=APC_0Fxf-dvnya7Ed5h8AX1]"
+    "stato": "prova fallita",
+    "nota": "12/11: stesso errore 2207085 anche senza copertina e senza share_to_feed. Nulla pubblicato"
   }
 ]
