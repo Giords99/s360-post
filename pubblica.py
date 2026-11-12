@@ -196,10 +196,11 @@ def carica_video(id_container, uri, video):
 
 # Varianti di caricamento del reel, provate in ordine se media_publish risponde con un errore
 # (10/11: "400 Fatal" ripetuto con il caricamento diretto + copertina).
-VARIANTI_REEL = [("diretto", True), ("link", True), ("link", False)]
+# (modo di caricamento, copertina, share_to_feed)
+VARIANTI_REEL = [("diretto", True, True), ("diretto", False, False)]
 
 
-def prepara_reel(cartella, modo="diretto", con_copertina=True):
+def prepara_reel(cartella, modo="diretto", con_copertina=True, nel_feed=True):
     """Crea su Instagram il reel (non ancora pubblicato) e restituisce l'ID del container."""
     c = cartella_di(cartella)
     video = c / "reel.mp4"
@@ -207,11 +208,11 @@ def prepara_reel(cartella, modo="diretto", con_copertina=True):
     print(f"{c.name}: reel, caption di {len(caption)} caratteri")
     controlla_video(video)
     utente = os.environ["IG_USER_ID"]
-    extra = {"share_to_feed": "true"}
+    extra = {"share_to_feed": "true"} if nel_feed else {}
     copertina = c / "copertina.jpg"
     if copertina.exists() and con_copertina:
         extra["cover_url"] = url_pubblico(copertina)
-    print(f"  variante: caricamento {modo}, {'con' if 'cover_url' in extra else 'senza'} copertina")
+    print(f"  variante: caricamento {modo}, {'con' if 'cover_url' in extra else 'senza'} copertina, {'con' if nel_feed else 'senza'} share_to_feed")
     r = None
     if modo == "diretto":
         try:
@@ -332,17 +333,17 @@ def pubblica_reel(cartella):
         print(f"  (limite di pubblicazione non leggibile: {e})")
     inizio = dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=1)
     ultimo = None
-    for modo, cop in VARIANTI_REEL:
+    for modo, cop, feed in VARIANTI_REEL:
         x = uscito_dopo(inizio)
         if x:
             print("  il reel risulta già pubblicato sul profilo")
             return x["id"], x.get("permalink", "")
         try:
-            id_c = prepara_reel(cartella, modo, cop)
+            id_c = prepara_reel(cartella, modo, cop, feed)
             # anche con status FINISHED la versione del video per la riproduzione può non essere pronta
             # (errore 2207082 "progressive_video_not_ready"): si aspetta e si riprova con attese crescenti
             time.sleep(60)
-            return pubblica_container(id_c, tentativi=4, attese=(60, 120, 180, 180))
+            return pubblica_container(id_c, tentativi=2, attese=(60, 60))
         except ErroreS360 as e:
             print(f"  variante non riuscita: {e}")
             ultimo = e

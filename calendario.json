@@ -106,5 +106,12 @@
     "cartella": "post/_prova_reel",
     "stato": "prova fallita",
     "nota": "11/11: 12 tentativi, sempre 400 Fatal code -1 subcode 2207085 'Errore interno generico' su media_publish, container FINISHED. Nulla pubblicato"
+  },
+  {
+    "data": "2026-11-12",
+    "ora": "14:00",
+    "cartella": "post/_prova_reel",
+    "stato": "programmato",
+    "nota": "Seconda prova vera dei reel (ok dell'utente del 12/11): da cancellare dal profilo se esce"
   }
 ]
