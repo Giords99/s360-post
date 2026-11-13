@@ -5,6 +5,7 @@ Uso:
   python pubblica.py --prova CARTELLA  prova a secco: verifica token e file, NON pubblica
 
 Una cartella con reel.mp4 (e facoltativa copertina.jpg) diventa un reel; altrimenti le slide JPEG diventano un carousel.
+Se nella cartella c'è risposta.txt ("Indovina il club"), il giorno dopo il testo esce come commento sotto il post.
 
 Variabili d'ambiente: IG_TOKEN (segreto del repository), IG_USER_ID.
 API usata: Instagram API with Instagram Login (graph.instagram.com).
@@ -29,6 +30,8 @@ RADICE = pathlib.Path(__file__).resolve().parent
 CALENDARIO = RADICE / "calendario.json"
 MAX_RITARDO = dt.timedelta(hours=6)  # oltre questo ritardo il post NON esce da solo
 ATTESA_STORIA = dt.timedelta(minutes=75)  # tempo lasciato per la storia fatta a mano
+ATTESA_RISPOSTA = dt.timedelta(hours=22)  # "Indovina il club": la risposta va nei commenti il giorno dopo
+ALLARME_RISPOSTA = dt.timedelta(hours=30) # se a quel punto non è ancora uscita, ogni controllo fallisce (mail di GitHub)
 
 
 class ErroreS360(Exception):
@@ -397,6 +400,41 @@ def _pubblica_reel(cartella):
     raise ultimo
 
 
+def gestisci_risposte(voci, adesso):
+    """Risposte di "Indovina il club" (regola del 13/11). La risposta è legata al post, non al calendario:
+    in calendario.json il post pubblicato ha risposta="in attesa" finché il commento non esce. Ogni controllo
+    (tutti i giorni, weekend compresi) riprova; dopo ALLARME_RISPOSTA l'esecuzione fallisce e GitHub manda la mail."""
+    errori = []
+    for v in voci:
+        if v.get("stato") != "pubblicato" or v.get("risposta") != "in attesa":
+            continue
+        uscito = dt.datetime.fromisoformat(v["pubblicato_il"])
+        if adesso - uscito < ATTESA_RISPOSTA:
+            continue
+        testo = (cartella_di(v["cartella"]) / "risposta.txt").read_text(encoding="utf-8").strip()
+        ultimo = None
+        for tok in (os.environ.get("IG_TOKEN"), os.environ.get("IG_TOKEN_REEL", "").strip().strip('"').strip("'")):
+            if not tok:
+                continue
+            salvato = os.environ["IG_TOKEN"]
+            os.environ["IG_TOKEN"] = tok
+            try:
+                r = api("POST", f"{v['id_media']}/comments", message=testo)
+                v.update(risposta="pubblicata", risposta_il=dt.datetime.now(ROMA).isoformat(timespec="minutes"),
+                         id_risposta=r.get("id"))
+                print(f"{v['cartella']}: risposta pubblicata nei commenti")
+                break
+            except ErroreS360 as e:
+                ultimo = e
+            finally:
+                os.environ["IG_TOKEN"] = salvato
+        if v.get("risposta") == "in attesa":
+            print(f"{v['cartella']}: risposta NON pubblicata, riprovo al prossimo controllo ({ultimo})")
+            if adesso - uscito > ALLARME_RISPOSTA:
+                errori.append(f"{v['cartella']}: la risposta nei commenti non è ancora uscita ({ultimo})")
+    return errori
+
+
 def esegui_calendario():
     voci = json.loads(CALENDARIO.read_text(encoding="utf-8"))
     adesso = dt.datetime.now(ROMA)
@@ -422,6 +460,8 @@ def esegui_calendario():
     for v in da_fare:
         print(f"Pubblico {v['cartella']} (previsto {v['data']} {v['ora']})")
         try:
+            if "indovina" in v["cartella"] and not (cartella_di(v["cartella"]) / "risposta.txt").exists():
+                raise ErroreS360("manca risposta.txt: un 'Indovina il club' non esce senza la risposta per il commento del giorno dopo")
             if (cartella_di(v["cartella"]) / "reel.mp4").exists():
                 id_media, link = pubblica_reel(v["cartella"])
             else:
@@ -434,6 +474,8 @@ def esegui_calendario():
             # (storia toccabile); se dopo ATTESA_STORIA non c'è nessuna storia, la pubblica lo script.
             if (cartella_di(v["cartella"]) / "storia.jpg").exists():
                 v["storia"] = "in attesa"
+            if (cartella_di(v["cartella"]) / "risposta.txt").exists():
+                v["risposta"] = "in attesa"
         except ErroreS360 as e:
             v.update(stato="errore", nota=str(e))
             errori.append(f"{v['cartella']}: {e}")
@@ -443,6 +485,9 @@ def esegui_calendario():
     if any(v.get("storia") == "in attesa" for v in voci):
         verifica_token()
         gestisci_storie(voci, dt.datetime.now(ROMA))
+    if any(v.get("risposta") == "in attesa" for v in voci):
+        verifica_token()
+        errori += gestisci_risposte(voci, dt.datetime.now(ROMA))
     CALENDARIO.write_text(json.dumps(voci, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if errori:
         raise ErroreS360("\n".join(errori))

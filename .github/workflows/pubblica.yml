@@ -1,10 +1,11 @@
 name: Pubblica su Instagram
 
 on:
-  # Lun-Ven, ogni 30 minuti tra le 11 e le 18 ora italiana (dopo le 15 servono per le storie di riserva) (GitHub ragiona in UTC).
+  # Tutti i giorni, ogni 30 minuti tra le 11 e le 18 ora italiana (dopo le 15 servono per le storie di riserva;
+  # il weekend serve per le risposte di "Indovina il club" del venerdì) (GitHub ragiona in UTC).
   # Lo script pubblica solo i post del calendario arrivati all'ora prevista.
   schedule:
-    - cron: '7,37 10-16 * * 1-5'
+    - cron: '7,37 10-16 * * *'
   # Appena cambia il calendario (es. una Notizia approvata da pubblicare subito)
   push:
     branches: [main]
