@@ -35,8 +35,12 @@
     "data": "2026-11-13",
     "ora": "13:00",
     "cartella": "post/2026-11-13_lente_int",
-    "stato": "programmato",
-    "nota": "spostato da Buffer il 6/11"
+    "stato": "pubblicato",
+    "nota": "spostato da Buffer il 6/11",
+    "pubblicato_il": "2026-11-13T14:05+01:00",
+    "id_media": "18644923993050143",
+    "link": "https://www.instagram.com/p/DfrspLTDbQv/",
+    "storia": "in attesa"
   },
   {
     "data": "2026-11-16",
