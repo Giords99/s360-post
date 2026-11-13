@@ -132,7 +132,10 @@
     "data": "2026-11-13",
     "ora": "15:00",
     "cartella": "post/2026-11-13_notizia_fiorentina_bilancio",
-    "stato": "programmato",
-    "nota": "Notizia"
+    "stato": "pubblicato",
+    "nota": "Notizia",
+    "pubblicato_il": "2026-11-13T15:18+01:00",
+    "id_media": "18119347528820362",
+    "link": "https://www.instagram.com/p/Dfr1B95DcIj/"
   }
 ]
