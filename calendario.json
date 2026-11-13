@@ -123,5 +123,12 @@
     "pubblicato_il": "2026-11-12T15:11+01:00",
     "id_media": "18111024472903374",
     "link": "https://www.instagram.com/reel/DfpPM3-j4S2/"
+  },
+  {
+    "data": "2026-11-13",
+    "ora": "15:00",
+    "cartella": "post/2026-11-13_notizia_fiorentina_bilancio",
+    "stato": "programmato",
+    "nota": "Notizia"
   }
 ]
