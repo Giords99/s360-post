@@ -1,148 +1,148 @@
 [
- {
-  "data": "2026-11-06",
-  "ora": "15:00",
-  "cartella": "post/2026-11-06_spiegato_5numeri",
-  "stato": "pubblicato",
-  "nota": "ripubblicazione: il post di Buffer è uscito senza la prima slide",
-  "pubblicato_il": "2026-11-06T15:29+01:00",
-  "id_media": "18081782603737525",
-  "link": "https://www.instagram.com/p/DfZ0p_mlUbx/"
- },
- {
-  "data": "2026-11-09",
-  "ora": "13:00",
-  "cartella": "post/2026-11-09_classifica_wage",
-  "stato": "pubblicato",
-  "nota": "spostato da Buffer il 6/11",
-  "pubblicato_il": "2026-11-09T13:33+01:00",
-  "id_media": "18649087957045463",
-  "link": "https://www.instagram.com/p/DfhVyQxGIA_/",
-  "storia": "fatta a mano"
- },
- {
-  "data": "2026-11-09",
-  "ora": "17:53",
-  "cartella": "post/2026-11-09_notizia_generali_stadium",
-  "stato": "pubblicato",
-  "nota": "Notizia",
-  "pubblicato_il": "2026-11-09T17:54+01:00",
-  "id_media": "18639514159065367",
-  "link": "https://www.instagram.com/p/Dfhzsl0F8yJ/"
- },
- {
-  "data": "2026-11-10",
-  "ora": "13:00",
-  "cartella": "post/2026-11-10_reel_wage",
-  "stato": "errore",
-  "nota": "10/11: 9 tentativi via API (con e senza musica, caricamento diretto o link, con e senza copertina) tutti con 400 Fatal su media_publish. Da pubblicare a mano dal telefono; causa da trovare prima del 17/11"
- },
- {
-  "data": "2026-11-11",
-  "ora": "13:00",
-  "cartella": "post/2026-11-11_flash_bilanci_2026",
-  "stato": "pubblicato",
-  "nota": "Flash bilanci 2025/26, approvato l'8/11",
-  "pubblicato_il": "2026-11-11T14:06+01:00",
-  "id_media": "18643813195054318",
-  "link": "https://www.instagram.com/p/DfmjLo7mF81/",
-  "storia": "pubblicata in automatico"
- },
- {
-  "data": "2026-11-11",
-  "ora": "17:55",
-  "cartella": "post/2026-11-11_notizia_cagliari_stadio",
-  "stato": "pubblicato",
-  "nota": "Notizia",
-  "pubblicato_il": "2026-11-11T17:56+01:00",
-  "id_media": "18286039231294870",
-  "link": "https://www.instagram.com/p/Dfm9g6HF8t1/"
- },
- {
-  "data": "2026-11-11",
-  "ora": "18:00",
-  "cartella": "post/_prova_reel",
-  "stato": "prova fallita",
-  "nota": "11/11: 12 tentativi, sempre 400 Fatal code -1 subcode 2207085 'Errore interno generico' su media_publish, container FINISHED. Nulla pubblicato"
- },
- {
-  "data": "2026-11-12",
-  "ora": "14:00",
-  "cartella": "post/_prova_reel",
-  "stato": "prova fallita",
-  "nota": "12/11: stesso errore 2207085 anche senza copertina e senza share_to_feed. Nulla pubblicato"
- },
- {
-  "data": "2026-11-12",
-  "ora": "15:00",
-  "cartella": "post/_prova_reel",
-  "stato": "pubblicato",
-  "nota": "Terza prova dei reel, con IG_TOKEN_REEL (token dall'accesso Instagram): da cancellare dal profilo se esce",
-  "pubblicato_il": "2026-11-12T15:11+01:00",
-  "id_media": "18111024472903374",
-  "link": "https://www.instagram.com/reel/DfpPM3-j4S2/"
- },
- {
-  "data": "2026-11-13",
-  "ora": "13:00",
-  "cartella": "post/2026-11-13_lente_int",
-  "stato": "pubblicato",
-  "nota": "spostato da Buffer il 6/11",
-  "pubblicato_il": "2026-11-13T14:05+01:00",
-  "id_media": "18644923993050143",
-  "link": "https://www.instagram.com/p/DfrspLTDbQv/",
-  "storia": "pubblicata in automatico"
- },
- {
-  "data": "2026-11-13",
-  "ora": "15:00",
-  "cartella": "post/2026-11-13_notizia_fiorentina_bilancio",
-  "stato": "pubblicato",
-  "nota": "Notizia",
-  "pubblicato_il": "2026-11-13T15:18+01:00",
-  "id_media": "18119347528820362",
-  "link": "https://www.instagram.com/p/Dfr1B95DcIj/"
- },
- {
-  "data": "2026-11-16",
-  "ora": "13:00",
-  "cartella": "post/2026-11-16_reel_dip_plus",
-  "stato": "programmato",
-  "nota": "Reel classifica plusvalenze, formato nuovo (barre sfalsate, stemmi), approvato il 13/11; musica da confermare"
- },
- {
-  "data": "2026-11-17",
-  "ora": "13:00",
-  "cartella": "post/2026-11-16_classifica_dip_plus",
-  "stato": "programmato",
-  "nota": "spostato dal 16/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
- },
- {
-  "data": "2026-11-17",
-  "ora": "13:00",
-  "cartella": "post/2026-11-17_reel_dip_plus",
-  "stato": "annullato",
-  "nota": "sostituito dal reel del 16/11 nel formato nuovo (calendario 3 reel + 2 caroselli, approvato il 13/11)"
- },
- {
-  "data": "2026-11-19",
-  "ora": "13:00",
-  "cartella": "post/2026-11-18_spiegato_giugno",
-  "stato": "programmato",
-  "nota": "spostato dal 18/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
- },
- {
-  "data": "2026-11-24",
-  "ora": "13:00",
-  "cartella": "post/2026-11-24_reel_numero_ricavi_inter",
-  "stato": "annullato",
-  "nota": "formato 'Un numero' tolto dal calendario (calendario 3 reel + 2 caroselli, approvato il 13/11)"
- },
- {
-  "data": "2026-11-26",
-  "ora": "13:00",
-  "cartella": "post/2026-11-20_lente_lec",
-  "stato": "programmato",
-  "nota": "spostato dal 20/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
- }
+  {
+    "data": "2026-11-06",
+    "ora": "15:00",
+    "cartella": "post/2026-11-06_spiegato_5numeri",
+    "stato": "pubblicato",
+    "nota": "ripubblicazione: il post di Buffer è uscito senza la prima slide",
+    "pubblicato_il": "2026-11-06T15:29+01:00",
+    "id_media": "18081782603737525",
+    "link": "https://www.instagram.com/p/DfZ0p_mlUbx/"
+  },
+  {
+    "data": "2026-11-09",
+    "ora": "13:00",
+    "cartella": "post/2026-11-09_classifica_wage",
+    "stato": "pubblicato",
+    "nota": "spostato da Buffer il 6/11",
+    "pubblicato_il": "2026-11-09T13:33+01:00",
+    "id_media": "18649087957045463",
+    "link": "https://www.instagram.com/p/DfhVyQxGIA_/",
+    "storia": "fatta a mano"
+  },
+  {
+    "data": "2026-11-09",
+    "ora": "17:53",
+    "cartella": "post/2026-11-09_notizia_generali_stadium",
+    "stato": "pubblicato",
+    "nota": "Notizia",
+    "pubblicato_il": "2026-11-09T17:54+01:00",
+    "id_media": "18639514159065367",
+    "link": "https://www.instagram.com/p/Dfhzsl0F8yJ/"
+  },
+  {
+    "data": "2026-11-10",
+    "ora": "13:00",
+    "cartella": "post/2026-11-10_reel_wage",
+    "stato": "errore",
+    "nota": "10/11: 9 tentativi via API (con e senza musica, caricamento diretto o link, con e senza copertina) tutti con 400 Fatal su media_publish. Da pubblicare a mano dal telefono; causa da trovare prima del 17/11"
+  },
+  {
+    "data": "2026-11-11",
+    "ora": "13:00",
+    "cartella": "post/2026-11-11_flash_bilanci_2026",
+    "stato": "pubblicato",
+    "nota": "Flash bilanci 2025/26, approvato l'8/11",
+    "pubblicato_il": "2026-11-11T14:06+01:00",
+    "id_media": "18643813195054318",
+    "link": "https://www.instagram.com/p/DfmjLo7mF81/",
+    "storia": "pubblicata in automatico"
+  },
+  {
+    "data": "2026-11-11",
+    "ora": "17:55",
+    "cartella": "post/2026-11-11_notizia_cagliari_stadio",
+    "stato": "pubblicato",
+    "nota": "Notizia",
+    "pubblicato_il": "2026-11-11T17:56+01:00",
+    "id_media": "18286039231294870",
+    "link": "https://www.instagram.com/p/Dfm9g6HF8t1/"
+  },
+  {
+    "data": "2026-11-11",
+    "ora": "18:00",
+    "cartella": "post/_prova_reel",
+    "stato": "prova fallita",
+    "nota": "11/11: 12 tentativi, sempre 400 Fatal code -1 subcode 2207085 'Errore interno generico' su media_publish, container FINISHED. Nulla pubblicato"
+  },
+  {
+    "data": "2026-11-12",
+    "ora": "14:00",
+    "cartella": "post/_prova_reel",
+    "stato": "prova fallita",
+    "nota": "12/11: stesso errore 2207085 anche senza copertina e senza share_to_feed. Nulla pubblicato"
+  },
+  {
+    "data": "2026-11-12",
+    "ora": "15:00",
+    "cartella": "post/_prova_reel",
+    "stato": "pubblicato",
+    "nota": "Terza prova dei reel, con IG_TOKEN_REEL (token dall'accesso Instagram): da cancellare dal profilo se esce",
+    "pubblicato_il": "2026-11-12T15:11+01:00",
+    "id_media": "18111024472903374",
+    "link": "https://www.instagram.com/reel/DfpPM3-j4S2/"
+  },
+  {
+    "data": "2026-11-13",
+    "ora": "13:00",
+    "cartella": "post/2026-11-13_lente_int",
+    "stato": "pubblicato",
+    "nota": "spostato da Buffer il 6/11",
+    "pubblicato_il": "2026-11-13T14:05+01:00",
+    "id_media": "18644923993050143",
+    "link": "https://www.instagram.com/p/DfrspLTDbQv/",
+    "storia": "pubblicata in automatico"
+  },
+  {
+    "data": "2026-11-13",
+    "ora": "15:00",
+    "cartella": "post/2026-11-13_notizia_fiorentina_bilancio",
+    "stato": "pubblicato",
+    "nota": "Notizia",
+    "pubblicato_il": "2026-11-13T15:18+01:00",
+    "id_media": "18119347528820362",
+    "link": "https://www.instagram.com/p/Dfr1B95DcIj/"
+  },
+  {
+    "data": "2026-11-16",
+    "ora": "13:00",
+    "cartella": "post/2026-11-16_reel_dip_plus",
+    "stato": "programmato",
+    "nota": "Reel classifica plusvalenze, formato nuovo (barre sfalsate, stemmi), approvato il 13/11; musica da confermare"
+  },
+  {
+    "data": "2026-11-17",
+    "ora": "13:00",
+    "cartella": "post/2026-11-16_classifica_dip_plus",
+    "stato": "programmato",
+    "nota": "spostato dal 16/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+  },
+  {
+    "data": "2026-11-17",
+    "ora": "13:00",
+    "cartella": "post/2026-11-17_reel_dip_plus",
+    "stato": "annullato",
+    "nota": "sostituito dal reel del 16/11 nel formato nuovo (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+  },
+  {
+    "data": "2026-11-19",
+    "ora": "13:00",
+    "cartella": "post/2026-11-18_spiegato_giugno",
+    "stato": "programmato",
+    "nota": "spostato dal 18/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+  },
+  {
+    "data": "2026-11-24",
+    "ora": "13:00",
+    "cartella": "post/2026-11-24_reel_numero_ricavi_inter",
+    "stato": "annullato",
+    "nota": "formato 'Un numero' tolto dal calendario (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+  },
+  {
+    "data": "2026-11-26",
+    "ora": "13:00",
+    "cartella": "post/2026-11-20_lente_lec",
+    "stato": "programmato",
+    "nota": "spostato dal 20/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+  }
 ]
