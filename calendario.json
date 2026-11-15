@@ -163,8 +163,8 @@
     "data": "2026-11-24",
     "ora": "13:00",
     "cartella": "post/2026-11-24_classifica_utile",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-11-25",
@@ -198,8 +198,8 @@
     "data": "2026-12-01",
     "ora": "13:00",
     "cartella": "post/2026-12-01_classifica_squad_cost",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-02",
@@ -212,8 +212,8 @@
     "data": "2026-12-03",
     "ora": "13:00",
     "cartella": "post/2026-12-03_spiegato_uefa",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-04",
@@ -233,22 +233,22 @@
     "data": "2026-12-08",
     "ora": "13:00",
     "cartella": "post/2026-12-08_classifica_pfn",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-09",
     "ora": "13:00",
     "cartella": "post/2026-12-09_reel_spiegato_ammortamento",
-    "stato": "da approvare",
-    "nota": "reel nuovo del 15/11 (Spiegato ammortamento, al posto di UEFA che doppiava il carosello del 3/12)"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-10",
     "ora": "13:00",
     "cartella": "post/2026-12-10_lente_juv",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-11",
@@ -268,8 +268,8 @@
     "data": "2026-12-15",
     "ora": "13:00",
     "cartella": "post/2026-12-15_classifica_pn",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-16",
@@ -282,8 +282,8 @@
     "data": "2026-12-17",
     "ora": "13:00",
     "cartella": "post/2026-12-17_spiegato_pn_negativo",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-18",
@@ -303,8 +303,8 @@
     "data": "2026-12-22",
     "ora": "13:00",
     "cartella": "post/2026-12-22_speciale_10_numeri",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-23",
@@ -324,15 +324,15 @@
     "data": "2026-12-29",
     "ora": "13:00",
     "cartella": "post/2026-12-29_classifica_crescita",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2026-12-30",
     "ora": "13:00",
     "cartella": "post/2026-12-30_presentazione_2027",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-04",
@@ -345,8 +345,8 @@
     "data": "2027-01-05",
     "ora": "13:00",
     "cartella": "post/2027-01-05_classifica_sponsor",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-06",
@@ -359,8 +359,8 @@
     "data": "2027-01-07",
     "ora": "13:00",
     "cartella": "post/2027-01-07_lente_mil",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-08",
@@ -380,8 +380,8 @@
     "data": "2027-01-12",
     "ora": "13:00",
     "cartella": "post/2027-01-12_classifica_stadio",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-13",
@@ -408,8 +408,8 @@
     "data": "2027-01-19",
     "ora": "13:00",
     "cartella": "post/2027-01-19_classifica_tv",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-20",
@@ -422,8 +422,8 @@
     "data": "2027-01-21",
     "ora": "13:00",
     "cartella": "post/2027-01-21_lente_rom",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-22",
@@ -436,8 +436,8 @@
     "data": "2027-01-28",
     "ora": "13:00",
     "cartella": "post/2027-01-28_lente_ata",
-    "stato": "da approvare",
-    "nota": "carosello rifatto/preparato il 15/11 con le nuove regole; diventa 'programmato' con l'ok dell'utente"
+    "stato": "programmato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)"
   },
   {
     "data": "2027-01-29",
