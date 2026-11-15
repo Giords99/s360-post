@@ -501,10 +501,18 @@ def controlla_token():
             print(f"{nome}: assente")
             continue
         salvato = os.environ.get("IG_TOKEN", "")
-        os.environ["IG_TOKEN"] = tok
         os.environ["IG_API_BASE"] = API_FB
         try:
-            d = api("GET", "debug_token", input_token=tok).get("data", {})
+            d = {}
+            for chi in (tok, salvato.strip()):   # prima il token stesso, poi quello dell'utente di sistema (stessa app)
+                os.environ["IG_TOKEN"] = chi
+                try:
+                    d = api("GET", "debug_token", input_token=tok).get("data", {})
+                    break
+                except ErroreS360 as e:
+                    errore = e
+            if not d:
+                raise errore
             fmt = lambda x: f"{dt.datetime.fromtimestamp(x, ROMA):%d/%m/%Y %H:%M}" if x else "nessuna"
             print(f"{nome}: inizia con '{tok[:4]}', tipo {d.get('type')}, app {d.get('application')}, valido {d.get('is_valid')}, "
                   f"scadenza {fmt(d.get('expires_at'))}, scadenza accesso ai dati {fmt(d.get('data_access_expires_at'))}, "
