@@ -493,12 +493,36 @@ def esegui_calendario():
         raise ErroreS360("\n".join(errori))
 
 
+def controlla_token():
+    """Stampa tipo e scadenza dei due token, senza rivelarli (python pubblica.py --token)."""
+    for nome in ("IG_TOKEN", "IG_TOKEN_REEL"):
+        tok = os.environ.get(nome, "").strip().strip('"').strip("'").strip()
+        if not tok:
+            print(f"{nome}: assente")
+            continue
+        salvato = os.environ.get("IG_TOKEN", "")
+        os.environ["IG_TOKEN"] = tok
+        os.environ["IG_API_BASE"] = API_FB
+        try:
+            d = api("GET", "debug_token", input_token=tok).get("data", {})
+            fmt = lambda x: f"{dt.datetime.fromtimestamp(x, ROMA):%d/%m/%Y %H:%M}" if x else "nessuna"
+            print(f"{nome}: inizia con '{tok[:4]}', tipo {d.get('type')}, app {d.get('application')}, valido {d.get('is_valid')}, "
+                  f"scadenza {fmt(d.get('expires_at'))}, scadenza accesso ai dati {fmt(d.get('data_access_expires_at'))}, "
+                  f"permessi {d.get('scopes')}")
+        except ErroreS360 as e:
+            print(f"{nome}: inizia con '{tok[:4]}', debug_token non riuscito: {e}")
+        finally:
+            os.environ["IG_TOKEN"] = salvato
+            os.environ.pop("IG_API_BASE", None)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--prova", metavar="CARTELLA", help="prova a secco su una cartella, senza pubblicare")
+    p.add_argument("--token", action="store_true", help="mostra tipo e scadenza dei token, senza pubblicare")
     a = p.parse_args()
     try:
-        prova(a.prova) if a.prova else esegui_calendario()
+        controlla_token() if a.token else prova(a.prova) if a.prova else esegui_calendario()
     except ErroreS360 as e:
         print(f"ERRORE: {e}", file=sys.stderr)
         sys.exit(1)

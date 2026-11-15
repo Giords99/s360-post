@@ -21,6 +21,7 @@ on:
         options:
           - 'Prova a secco (non pubblica)'
           - 'Pubblica i post del calendario'
+          - 'Controlla la scadenza dei token'
       cartella:
         description: 'Solo per la prova a secco: cartella da controllare'
         required: false
@@ -53,6 +54,10 @@ jobs:
       - name: Prova a secco (non pubblica)
         if: github.event_name == 'workflow_dispatch' && inputs.azione == 'Prova a secco (non pubblica)'
         run: python pubblica.py --prova "$CARTELLA_PROVA"
+
+      - name: Controlla la scadenza dei token
+        if: github.event_name == 'workflow_dispatch' && inputs.azione == 'Controlla la scadenza dei token'
+        run: python pubblica.py --token
 
       - name: Pubblica i post del calendario
         if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.azione == 'Pubblica i post del calendario'
