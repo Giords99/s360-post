@@ -274,7 +274,7 @@
   {
     "data": "2027-01-06",
     "ora": "13:00",
-    "cartella": "post/2027-01-06_reel_6s_bol",
+    "cartella": "post/2027-01-06_reel_6s_rom",
     "stato": "da approvare",
     "nota": "bozza del 13/11, passati i controlli automatici; diventa 'programmato' con l'ok dell'utente"
   },
@@ -316,7 +316,7 @@
   {
     "data": "2027-01-20",
     "ora": "13:00",
-    "cartella": "post/2027-01-20_reel_6s_rom",
+    "cartella": "post/2027-01-20_reel_6s_nap",
     "stato": "da approvare",
     "nota": "bozza del 13/11, passati i controlli automatici; diventa 'programmato' con l'ok dell'utente"
   },
