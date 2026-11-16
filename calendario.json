@@ -107,8 +107,11 @@
     "data": "2026-11-16",
     "ora": "13:00",
     "cartella": "post/2026-11-16_reel_dip_plus",
-    "stato": "programmato",
-    "nota": "Reel classifica plusvalenze, formato nuovo (barre sfalsate, stemmi, musica tech), approvato il 13/11"
+    "stato": "pubblicato",
+    "nota": "Reel classifica plusvalenze, formato nuovo (barre sfalsate, stemmi, musica tech), approvato il 13/11",
+    "pubblicato_il": "2026-11-16T14:50+01:00",
+    "id_media": "18030074990701373",
+    "link": "https://www.instagram.com/reel/DfzgEjPk-Ww/"
   },
   {
     "data": "2026-11-17",
