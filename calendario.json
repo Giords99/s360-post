@@ -135,8 +135,11 @@
     "data": "2026-11-18",
     "ora": "13:00",
     "cartella": "post/2026-11-18_reel_6s_int",
-    "stato": "programmato",
-    "nota": "Reel 'Club in 6 stagioni': utile Inter 2019/20-2024/25, approvato il 13/11"
+    "stato": "pubblicato",
+    "nota": "Reel 'Club in 6 stagioni': utile Inter 2019/20-2024/25, approvato il 13/11",
+    "pubblicato_il": "2026-11-18T14:07+01:00",
+    "id_media": "18151814503559955",
+    "link": "https://www.instagram.com/reel/Df4ktIUjbc1/"
   },
   {
     "data": "2026-11-19",
