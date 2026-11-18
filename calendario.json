@@ -157,7 +157,7 @@
     "ora": "13:00",
     "cartella": "post/2026-11-23_reel_cl_utile",
     "stato": "programmato",
-    "nota": "reel approvato dall'utente il 15/11"
+    "nota": "reel approvato dall'utente il 15/11; 18/11 rifatto con chiusura corta (test approvato dall'utente)"
   },
   {
     "data": "2026-11-24",
@@ -199,7 +199,7 @@
     "ora": "13:00",
     "cartella": "post/2026-11-30_reel_cl_squad_cost",
     "stato": "programmato",
-    "nota": "reel approvato dall'utente il 15/11"
+    "nota": "reel approvato dall'utente il 15/11; 18/11 rifatto con chiusura corta (test approvato dall'utente)"
   },
   {
     "data": "2026-12-01",
@@ -225,9 +225,16 @@
   {
     "data": "2026-12-04",
     "ora": "13:00",
-    "cartella": "post/2026-12-04_reel_indovina_nap",
+    "cartella": "post/2026-12-04_reel_derby_laz_ata",
     "stato": "programmato",
-    "nota": "reel approvato dall'utente il 15/11"
+    "nota": "Derby dei conti, nuovo formato approvato dall'utente il 18/11 (Lazio-Atalanta domenica 6/12)"
+  },
+  {
+    "data": "2026-12-04",
+    "ora": "13:00",
+    "cartella": "post/2026-12-04_reel_indovina_nap",
+    "stato": "annullato",
+    "nota": "18/11: spostato a febbraio (19/2) per far posto al Derby dei conti Lazio-Atalanta"
   },
   {
     "data": "2026-12-07",
