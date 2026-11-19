@@ -145,8 +145,12 @@
     "data": "2026-11-19",
     "ora": "13:00",
     "cartella": "post/2026-11-18_spiegato_giugno",
-    "stato": "programmato",
-    "nota": "spostato dal 18/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+    "stato": "pubblicato",
+    "nota": "spostato dal 18/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)",
+    "pubblicato_il": "2026-11-19T14:11+01:00",
+    "id_media": "17912156736597145",
+    "link": "https://www.instagram.com/p/Df7KDqEERjl/",
+    "storia": "in attesa"
   },
   {
     "data": "2026-11-20",
