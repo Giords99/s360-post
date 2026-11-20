@@ -156,8 +156,12 @@
     "data": "2026-11-20",
     "ora": "13:00",
     "cartella": "post/2026-11-20_reel_indovina_ata",
-    "stato": "programmato",
-    "nota": "Reel 'Indovina il club' (A-B-C), approvato il 13/11; risposta nei commenti il giorno dopo da risposta.txt"
+    "stato": "pubblicato",
+    "nota": "Reel 'Indovina il club' (A-B-C), approvato il 13/11; risposta nei commenti il giorno dopo da risposta.txt",
+    "pubblicato_il": "2026-11-20T14:06+01:00",
+    "id_media": "17999520825106408",
+    "link": "https://www.instagram.com/reel/Df9uI_XkXj6/",
+    "risposta": "in attesa"
   },
   {
     "data": "2026-11-23",
