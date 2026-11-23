@@ -169,8 +169,11 @@
     "data": "2026-11-23",
     "ora": "13:00",
     "cartella": "post/2026-11-23_reel_cl_utile",
-    "stato": "programmato",
-    "nota": "reel approvato dall'utente il 15/11; 18/11 rifatto con chiusura corta (test approvato dall'utente)"
+    "stato": "pubblicato",
+    "nota": "reel approvato dall'utente il 15/11; 18/11 rifatto con chiusura corta (test approvato dall'utente)",
+    "pubblicato_il": "2026-11-23T14:16+01:00",
+    "id_media": "18643333696013105",
+    "link": "https://www.instagram.com/reel/DgFdpSTgfBz/"
   },
   {
     "data": "2026-11-24",
