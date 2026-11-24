@@ -186,8 +186,12 @@
     "data": "2026-11-24",
     "ora": "13:00",
     "cartella": "post/2026-11-24_classifica_utile",
-    "stato": "programmato",
-    "nota": "approvato dall'utente il 15/11 (versione 2)"
+    "stato": "pubblicato",
+    "nota": "approvato dall'utente il 15/11 (versione 2)",
+    "pubblicato_il": "2026-11-24T14:14+01:00",
+    "id_media": "18134253919814078",
+    "link": "https://www.instagram.com/p/DgICaBYDcm7/",
+    "storia": "in attesa"
   },
   {
     "data": "2026-11-25",
