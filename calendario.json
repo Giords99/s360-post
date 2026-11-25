@@ -197,8 +197,11 @@
     "data": "2026-11-25",
     "ora": "13:00",
     "cartella": "post/2026-11-25_reel_spiegato_plusvalenze",
-    "stato": "programmato",
-    "nota": "reel approvato dall'utente il 15/11"
+    "stato": "pubblicato",
+    "nota": "reel approvato dall'utente il 15/11",
+    "pubblicato_il": "2026-11-25T14:18+01:00",
+    "id_media": "17944476732392147",
+    "link": "https://www.instagram.com/reel/DgKngMjNNlG/"
   },
   {
     "data": "2026-11-26",
