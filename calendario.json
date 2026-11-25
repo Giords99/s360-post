@@ -482,5 +482,12 @@
     "cartella": "post/2027-01-29_reel_indovina_int",
     "stato": "programmato",
     "nota": "reel approvato dall'utente il 15/11"
+  },
+  {
+    "data": "2026-11-25",
+    "ora": "17:45",
+    "cartella": "post/2026-11-25_notizia_como_stadio",
+    "stato": "programmato",
+    "nota": "Notizia"
   }
 ]
