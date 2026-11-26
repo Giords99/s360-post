@@ -207,8 +207,12 @@
     "data": "2026-11-26",
     "ora": "13:00",
     "cartella": "post/2026-11-20_lente_lec",
-    "stato": "programmato",
-    "nota": "spostato dal 20/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)"
+    "stato": "pubblicato",
+    "nota": "spostato dal 20/11 (calendario 3 reel + 2 caroselli, approvato il 13/11)",
+    "pubblicato_il": "2026-11-26T14:17+01:00",
+    "id_media": "17884642260632178",
+    "link": "https://www.instagram.com/p/DgNMS1djeB6/",
+    "storia": "in attesa"
   },
   {
     "data": "2026-11-27",
